@@ -30,63 +30,47 @@
 <body>
   <h1>Average Damage Calculator</h1>
 
-  <!-- Input for ATK stat -->
   <label for="atk">ATK:</label>
   <input type="number" id="atk" value="3000" />
 
-  <!-- Input for Crit Rate as a percentage -->
   <label for="critRate">Crit Rate (%):</label>
   <input type="number" id="critRate" value="70" />
 
-  <!-- Input for Crit Damage as a percentage -->
   <label for="critDmg">Crit Damage (%):</label>
   <input type="number" id="critDmg" value="120" />
 
-  <!-- Input for total bonus damage as a percentage -->
   <label for="dmgBonus">Total Damage Bonus (%):</label>
   <input type="number" id="dmgBonus" value="25" />
 
-  <!-- Display the result -->
   <div class="result" id="output">Average Damage: --</div>
 
   <script>
-    // Get all input elements
     const inputs = document.querySelectorAll('input');
     const output = document.getElementById('output');
 
     function calculateDamage() {
-      // Parse input values and convert percentages to decimals
       const atk = parseFloat(document.getElementById('atk').value) || 0;
       let critRate = (parseFloat(document.getElementById('critRate').value) || 0) / 100;
       const critDmg = (parseFloat(document.getElementById('critDmg').value) || 0) / 100;
       const dmgBonus = (parseFloat(document.getElementById('dmgBonus').value) || 0) / 100;
 
-      // Clamp crit rate to a maximum of 1 (100%)
       if (critRate > 1) critRate = 1;
 
-      // Calculate the average critical multiplier
-      // E.g., with 70% crit rate and 120% crit dmg: 1 + 0.7 * 1.2 = 1.84
       const critMultiplier = 1 + critRate * critDmg;
 
-      // Additive bonus multiplier
-      // E.g., 25% damage bonus becomes 1.25
       const bonusMultiplier = 1 + dmgBonus;
 
-      // Final average damage formula
       const avgDamage = atk * critMultiplier * bonusMultiplier;
 
-      // Show result, rounded to 2 decimals
       output.textContent = `Average Damage: ${avgDamage.toFixed(2)}`;
     }
 
-    // Attach event listener to all input fields
     inputs.forEach(input => input.addEventListener('input', calculateDamage));
 
-    // Run calculation once on load
     calculateDamage();
   </script>
     <footer style="margin-top: 2rem; font-size: 0.8rem; color: #555; text-align: center;">
-      Autis City
+      Autis City | Only for reference, not to be used as an actual calculation
     </footer>
 </body>
 </html>
